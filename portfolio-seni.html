@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aruna Studio — Portofolio Seni</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --cream: #f5f0e8;
+      --ink:   #1a1209;
+      --rust:  #c0440e;
+      --gold:  #c9922a;
+      --sage:  #5a7a5e;
+      --paper: #ede8dc;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+    }
+
+    h1,h2,h3,h4,h5,.display-font {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    /* ── NAVBAR ─────────────────────────────────── */
+    .navbar {
+      background: var(--ink) !important;
+      border-bottom: 3px solid var(--rust);
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--cream) !important;
+      letter-spacing: .03em;
+    }
+    .navbar-brand span { color: var(--rust); }
+    .nav-link {
+      color: #ccc5b0 !important;
+      font-size: .875rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--gold) !important; }
+    .navbar-toggler { border-color: var(--rust); }
+    .navbar-toggler-icon { filter: invert(1); }
+
+    /* ── HERO ────────────────────────────────────── */
+    .hero {
+      background: var(--ink);
+      min-height: 92vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 70% 50%, rgba(192,68,14,.18) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-tag {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--rust);
+      font-weight: 500;
+      margin-bottom: .75rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.08;
+      color: var(--cream);
+    }
+    .hero h1 em { color: var(--rust); font-style: italic; }
+    .hero p.lead {
+      color: #a09880;
+      max-width: 480px;
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+    .btn-rust {
+      background: var(--rust);
+      color: #fff;
+      border: none;
+      border-radius: 0;
+      padding: .7rem 2rem;
+      font-size: .8rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      transition: background .2s, transform .15s;
+    }
+    .btn-rust:hover { background: #a33a0b; color: #fff; transform: translateY(-2px); }
+    .btn-outline-cream {
+      background: transparent;
+      color: var(--cream);
+      border: 1.5px solid #5a5040;
+      border-radius: 0;
+      padding: .68rem 1.8rem;
+      font-size: .8rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      transition: all .2s;
+    }
+    .btn-outline-cream:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+
+    .hero-stat { text-align: center; }
+    .hero-stat .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: var(--cream);
+    }
+    .hero-stat .lbl {
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #6b6050;
+    }
+    .hero-divider { width: 1px; background: #333; height: 40px; }
+
+    /* ── ALERT ───────────────────────────────────── */
+    .alert-exhibit {
+      background: #fff8ee;
+      border-left: 4px solid var(--gold);
+      border-radius: 0;
+      color: var(--ink);
+    }
+
+    /* ── SECTION ─────────────────────────────────── */
+    .section-label {
+      font-size: .7rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--rust);
+      font-weight: 500;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.15;
+    }
+
+    /* ── CARDS ───────────────────────────────────── */
+    .art-card {
+      border: none;
+      border-radius: 0;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      overflow: hidden;
+      transition: box-shadow .25s, transform .25s;
+    }
+    .art-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.13); transform: translateY(-4px); }
+    .art-card img {
+      height: 240px;
+      object-fit: cover;
+      width: 100%;
+      filter: saturate(.9);
+      transition: filter .3s, transform .4s;
+    }
+    .art-card:hover img { filter: saturate(1.1); transform: scale(1.04); }
+    .card-img-wrap { overflow: hidden; position: relative; }
+    .card-year {
+      position: absolute; top: 12px; right: 12px;
+      background: var(--ink);
+      color: var(--cream);
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .25rem .6rem;
+    }
+    .card-category {
+      font-size: .68rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--rust);
+      font-weight: 500;
+    }
+    .card-title-art {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+    }
+    .btn-dl {
+      background: var(--paper);
+      color: var(--ink);
+      border: none;
+      border-radius: 0;
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .5rem 1rem;
+      transition: background .2s;
+    }
+    .btn-dl:hover { background: var(--rust); color: #fff; }
+
+    /* ── FILTER PILLS ────────────────────────────── */
+    .filter-btn {
+      border-radius: 0;
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: .35rem 1rem;
+      border: 1.5px solid #ccc3b0;
+      background: transparent;
+      color: var(--ink);
+      transition: all .15s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+    }
+
+    /* ── TABLE ───────────────────────────────────── */
+    .table-exhibit { font-size: .875rem; }
+    .table-exhibit thead { background: var(--ink); color: var(--cream); }
+    .table-exhibit thead th { font-weight: 400; letter-spacing: .08em; text-transform: uppercase; font-size: .75rem; padding: .9rem 1rem; }
+    .table-exhibit tbody tr { transition: background .15s; }
+    .table-exhibit tbody tr:hover { background: #f5ede0; }
+    .badge-media {
+      border-radius: 0;
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* ── LIST GROUP ──────────────────────────────── */
+    .list-group-flush .list-group-item {
+      border-left: none;
+      border-right: none;
+      background: transparent;
+      padding: .85rem 0;
+    }
+    .list-group-item .award-title { font-family: 'Playfair Display', serif; font-size: .95rem; }
+    .list-group-item .award-year { font-size: .72rem; color: #888; letter-spacing: .1em; }
+
+    /* ── FORM ────────────────────────────────────── */
+    .contact-section { background: var(--paper); }
+    .form-control, .form-select {
+      border-radius: 0;
+      border: 1.5px solid #ccc3b0;
+      background: #fff;
+      font-size: .9rem;
+      padding: .65rem .9rem;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--rust);
+      box-shadow: 0 0 0 3px rgba(192,68,14,.12);
+    }
+    .form-label { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: #6b5f4e; font-weight: 500; }
+
+    /* ── MODAL ───────────────────────────────────── */
+    .modal-content { border-radius: 0; border: none; }
+    .modal-header { background: var(--ink); color: var(--cream); border-bottom: 2px solid var(--rust); }
+    .modal-title { font-family: 'Playfair Display', serif; }
+    .btn-close-white { filter: invert(1) brightness(2); }
+    .modal-img { width: 100%; height: 320px; object-fit: cover; }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      border-top: 3px solid var(--rust);
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--cream);
+    }
+    .footer-brand span { color: var(--rust); }
+    footer p, footer a { color: #6b6050; font-size: .83rem; }
+    footer a:hover { color: var(--gold); text-decoration: none; }
+    .footer-heading { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: #4a4030; margin-bottom: 1rem; }
+    .social-icon {
+      width: 36px; height: 36px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1.5px solid #3a3025;
+      color: #6b6050;
+      font-size: 1rem;
+      transition: all .2s;
+      text-decoration: none;
+    }
+    .social-icon:hover { border-color: var(--rust); color: var(--rust); }
+    .footer-divider { border-color: #2a2018; }
+  </style>
+</head>
+<body>
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║              NAVBAR                          ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<nav class="navbar navbar-expand-lg sticky-top py-3">
+  <div class="container">
+    <a class="navbar-brand" href="#">Aruna<span>.</span>Studio</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-lg-1 align-items-lg-center">
+        <li class="nav-item"><a class="nav-link active" href="#galeri">Galeri</a></li>
+        <li class="nav-item"><a class="nav-link" href="#katalog">Katalog</a></li>
+        <li class="nav-item"><a class="nav-link" href="#penghargaan">Penghargaan</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tentang">Tentang</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="nav-link" href="#kontak" data-bs-toggle="modal" data-bs-target="#contactModal">
+            <i class="bi bi-envelope me-1"></i>Kontak
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║              HERO / JUMBOTRON               ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section class="hero">
+  <div class="container position-relative z-1 py-5">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-7">
+        <div class="hero-tag mb-2"><i class="bi bi-dot"></i> Portofolio Seni Digital & Klasik</div>
+        <h1 class="mb-4">Setiap Goresan<br/>adalah <em>Jiwa</em><br/>yang Bercerita</h1>
+        <p class="lead mb-5">Koleksi karya seni lintas media — dari cat minyak tradisional hingga ilustrasi digital kontemporer. Jelajahi, unduh, dan rasakan setiap emosi di balik kanvas.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#galeri" class="btn btn-rust"><i class="bi bi-image me-2"></i>Lihat Galeri</a>
+          <a href="#katalog" class="btn btn-outline-cream"><i class="bi bi-table me-2"></i>Katalog Lengkap</a>
+        </div>
+
+        <!-- Stats -->
+        <div class="d-flex align-items-center gap-4 mt-5 pt-3">
+          <div class="hero-stat">
+            <div class="num">48</div>
+            <div class="lbl">Karya</div>
+          </div>
+          <div class="hero-divider"></div>
+          <div class="hero-stat">
+            <div class="num">12</div>
+            <div class="lbl">Pameran</div>
+          </div>
+          <div class="hero-divider"></div>
+          <div class="hero-stat">
+            <div class="num">7</div>
+            <div class="lbl">Penghargaan</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative right column -->
+      <div class="col-lg-5 d-none d-lg-flex justify-content-end">
+        <div style="position:relative; width:340px; height:420px;">
+          <div style="position:absolute;top:0;right:0;width:280px;height:360px;background:linear-gradient(135deg,#c0440e22,#c9922a33);border:1.5px solid #c0440e44;"></div>
+          <div style="position:absolute;bottom:0;left:0;width:260px;height:320px;background:#1e1608;border:1.5px solid #3a3025;display:flex;align-items:center;justify-content:center;">
+            <div style="text-align:center;padding:2rem;">
+              <div style="font-family:'Playfair Display',serif;font-size:3rem;line-height:1;color:#c9922a;">A</div>
+              <div style="font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:#4a4030;margin-top:.5rem;">ARUNA STUDIO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── ALERT ─────────────────────────────────────── -->
+<div class="container my-4">
+  <div class="alert alert-exhibit d-flex align-items-start gap-3" role="alert">
+    <i class="bi bi-megaphone-fill text-warning fs-5 mt-1"></i>
+    <div>
+      <strong>Pameran Baru!</strong> &nbsp;
+      <span class="badge rounded-0 text-bg-danger me-2">Baru</span>
+      Koleksi <em>"Archipelago Dreams"</em> kini tersedia untuk diunduh secara gratis.
+      <a href="#galeri" class="alert-link ms-2">Lihat sekarang →</a>
+    </div>
+    <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert"></button>
+  </div>
+</div>
+
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║              GALERI (CARDS)                  ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="galeri" class="py-6" style="padding-top:5rem;padding-bottom:5rem;">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="row mb-4 align-items-end">
+      <div class="col-lg-6">
+        <div class="section-label mb-2"><i class="bi bi-grid me-1"></i>Koleksi Utama</div>
+        <h2 class="section-title mb-0">Galeri Karya</h2>
+      </div>
+      <div class="col-lg-6 mt-3 mt-lg-0">
+        <div class="d-flex flex-wrap gap-2 justify-content-lg-end">
+          <button class="filter-btn active">Semua</button>
+          <button class="filter-btn">Lukisan</button>
+          <button class="filter-btn">Digital</button>
+          <button class="filter-btn">Sketsa</button>
+          <button class="filter-btn">Fotografi</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards Row -->
+    <div class="row g-4">
+
+      <!-- Card 1 -->
+      <div class="col-sm-6 col-lg-4">
+        <div class="art-card card h-100">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600&q=80" alt="Senja Nusantara"/>
+            <span class="card-year">2024</span>
+          </div>
+          <div class="card-body d-flex flex-column p-4">
+            <div class="card-category mb-1">Lukisan Cat Minyak</div>
+            <h5 class="card-title-art mb-2">Senja Nusantara</h5>
+            <p class="card-text text-muted small mb-3 flex-grow-1">
+              Interpretasi abstrak panorama kepulauan saat senja. Menggunakan teknik impasto dengan warna oranye keemasan dan biru nila.
+            </p>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="badge rounded-0 bg-warning text-dark me-1">Terjual</span>
+              <button class="btn btn-dl" data-bs-toggle="modal" data-bs-target="#artModal1">
+                <i class="bi bi-zoom-in me-1"></i>Detail
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-sm-6 col-lg-4">
+        <div class="art-card card h-100">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=600&q=80" alt="Batik Geometri"/>
+            <span class="card-year">2024</span>
+          </div>
+          <div class="card-body d-flex flex-column p-4">
+            <div class="card-category mb-1">Ilustrasi Digital</div>
+            <h5 class="card-title-art mb-2">Batik Geometri #7</h5>
+            <p class="card-text text-muted small mb-3 flex-grow-1">
+              Reinterpretasi motif batik tradisional dalam estetika geometri modern. Dibuat dengan Procreate dan difinishing di Illustrator.
+            </p>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="badge rounded-0 bg-success me-1">Tersedia</span>
+              <a href="#" class="btn btn-dl">
+                <i class="bi bi-download me-1"></i>Unduh
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-sm-6 col-lg-4">
+        <div class="art-card card h-100">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1541367777708-7905fe3296c0?w=600&q=80" alt="Wayang Kontemporer"/>
+            <span class="card-year">2023</span>
+          </div>
+          <div class="card-body d-flex flex-column p-4">
+            <div class="card-category mb-1">Mixed Media</div>
+            <h5 class="card-title-art mb-2">Wayang Kontemporer</h5>
+            <p class="card-text text-muted small mb-3 flex-grow-1">
+              Karya kolase menggabungkan siluet wayang kulit dengan elemen tipografi dan tekstur kertas daur ulang.
+            </p>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="badge rounded-0 bg-success me-1">Tersedia</span>
+              <a href="#" class="btn btn-dl">
+                <i class="bi bi-download me-1"></i>Unduh
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="col-sm-6 col-lg-4">
+        <div class="art-card card h-100">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Ratu Laut Selatan"/>
+            <span class="card-year">2023</span>
+          </div>
+          <div class="card-body d-flex flex-column p-4">
+            <div class="card-category mb-1">Sketsa Charcoal</div>
+            <h5 class="card-title-art mb-2">Ratu Laut Selatan</h5>
+            <p class="card-text text-muted small mb-3 flex-grow-1">
+              Potret figuratif ekspresif dengan arang di atas kertas linen. Terinspirasi dari legenda Nyi Roro Kidul.
+            </p>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="badge rounded-0 bg-secondary me-1">Edisi Terbatas</span>
+              <a href="#" class="btn btn-dl">
+                <i class="bi bi-download me-1"></i>Unduh
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="col-sm-6 col-lg-4">
+        <div class="art-card card h-100">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=600&q=80" alt="Urban Kejawen"/>
+            <span class="card-year">2022</span>
+          </div>
+          <div class="card-body d-flex flex-column p-4">
+            <div class="card-category mb-1">Fotografi Seni</div>
+            <h5 class="card-title-art mb-2">Urban Kejawen</h5>
+            <p class="card-text text-muted small mb-3 flex-grow-1">
+              Seri foto fine art memadukan elemen budaya Jawa dengan arsitektur kota modern Surabaya dan Yogyakarta.
+            </p>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="badge rounded-0 bg-success me-1">Tersedia</span>
+              <a href="#" class="btn btn-dl">
+                <i class="bi bi-download me-1"></i>Unduh
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="col-sm-6 col-lg-4">
+        <div class="art-card card h-100">
+          <div class="card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&q=80" alt="Archipelago Dreams"/>
+            <span class="card-year">2022</span>
+          </div>
+          <div class="card-body d-flex flex-column p-4">
+            <div class="card-category mb-1">Lukisan Akrilik</div>
+            <h5 class="card-title-art mb-2">Archipelago Dreams</h5>
+            <p class="card-text text-muted small mb-3 flex-grow-1">
+              Lanskap abstrak kepulauan dengan palet biru-hijau yang lembut. Teknik wet-on-wet di atas kanvas 120×80 cm.
+            </p>
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="badge rounded-0 bg-danger me-1">Gratis</span>
+              <a href="#" class="btn btn-dl">
+                <i class="bi bi-download me-1"></i>Unduh
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /row -->
+
+    <div class="text-center mt-5">
+      <button class="btn btn-rust px-5">Muat Lebih Banyak <i class="bi bi-arrow-down ms-2"></i></button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║              TABLE (KATALOG)                 ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="katalog" style="background:var(--paper);padding-top:5rem;padding-bottom:5rem;">
+  <div class="container">
+    <div class="section-label mb-2"><i class="bi bi-table me-1"></i>Inventaris</div>
+    <h2 class="section-title mb-5">Katalog Lengkap</h2>
+
+    <div class="table-responsive shadow-sm">
+      <table class="table table-exhibit table-hover mb-0">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Judul Karya</th>
+            <th>Media</th>
+            <th>Dimensi</th>
+            <th>Tahun</th>
+            <th>Status</th>
+            <th>Unduh</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-muted">01</td>
+            <td><strong>Senja Nusantara</strong></td>
+            <td><span class="badge badge-media text-bg-warning">Cat Minyak</span></td>
+            <td>100 × 80 cm</td>
+            <td>2024</td>
+            <td><span class="badge rounded-0 bg-warning text-dark">Terjual</span></td>
+            <td><a href="#" class="text-muted"><i class="bi bi-file-earmark-image"></i> JPG</a></td>
+          </tr>
+          <tr>
+            <td class="text-muted">02</td>
+            <td><strong>Batik Geometri #7</strong></td>
+            <td><span class="badge badge-media text-bg-primary">Digital</span></td>
+            <td>4000 × 3000 px</td>
+            <td>2024</td>
+            <td><span class="badge rounded-0 bg-success">Tersedia</span></td>
+            <td><a href="#"><i class="bi bi-file-earmark-arrow-down"></i> PNG</a></td>
+          </tr>
+          <tr>
+            <td class="text-muted">03</td>
+            <td><strong>Wayang Kontemporer</strong></td>
+            <td><span class="badge badge-media text-bg-secondary">Mixed Media</span></td>
+            <td>60 × 90 cm</td>
+            <td>2023</td>
+            <td><span class="badge rounded-0 bg-success">Tersedia</span></td>
+            <td><a href="#"><i class="bi bi-file-earmark-arrow-down"></i> JPG</a></td>
+          </tr>
+          <tr>
+            <td class="text-muted">04</td>
+            <td><strong>Ratu Laut Selatan</strong></td>
+            <td><span class="badge badge-media text-bg-dark">Charcoal</span></td>
+            <td>50 × 70 cm</td>
+            <td>2023</td>
+            <td><span class="badge rounded-0 bg-secondary">Ed. Terbatas</span></td>
+            <td><a href="#"><i class="bi bi-file-earmark-arrow-down"></i> PDF</a></td>
+          </tr>
+          <tr>
+            <td class="text-muted">05</td>
+            <td><strong>Urban Kejawen</strong></td>
+            <td><span class="badge badge-media text-bg-info text-dark">Fotografi</span></td>
+            <td>3:2 Ratio</td>
+            <td>2022</td>
+            <td><span class="badge rounded-0 bg-success">Tersedia</span></td>
+            <td><a href="#"><i class="bi bi-file-earmark-arrow-down"></i> JPG</a></td>
+          </tr>
+          <tr>
+            <td class="text-muted">06</td>
+            <td><strong>Archipelago Dreams</strong></td>
+            <td><span class="badge badge-media text-bg-success">Akrilik</span></td>
+            <td>120 × 80 cm</td>
+            <td>2022</td>
+            <td><span class="badge rounded-0 bg-danger">Gratis</span></td>
+            <td><a href="#"><i class="bi bi-file-earmark-arrow-down"></i> JPG</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║        PENGHARGAAN (LIST GROUP)              ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="penghargaan" style="padding-top:5rem;padding-bottom:5rem;">
+  <div class="container">
+    <div class="row g-5">
+
+      <div class="col-lg-5">
+        <div class="section-label mb-2"><i class="bi bi-trophy me-1"></i>Rekam Jejak</div>
+        <h2 class="section-title mb-3">Penghargaan &amp; Pameran</h2>
+        <p class="text-muted" style="font-size:.9rem;line-height:1.8;">
+          Karya-karya Aruna Studio telah diakui dalam berbagai kompetisi seni nasional dan internasional, serta dipamerkan di galeri bergengsi di Indonesia dan Asia Tenggara.
+        </p>
+        <div class="mt-4 p-4" style="background:var(--paper);border-left:3px solid var(--rust);">
+          <p class="mb-1" style="font-family:'Playfair Display',serif;font-size:1.1rem;">"Karya yang merayakan identitas tanpa kehilangan universalitas."</p>
+          <small class="text-muted">— Kuratorial Galeri Nasional Indonesia, 2024</small>
+        </div>
+      </div>
+
+      <div class="col-lg-7">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex align-items-start gap-3">
+            <i class="bi bi-award-fill text-warning fs-5 mt-1"></i>
+            <div>
+              <div class="award-title">Juara I — Kompetisi Seni Rupa Nasional</div>
+              <div class="text-muted small">Dewan Kesenian Jakarta &nbsp;·&nbsp; <span class="award-year">2024</span></div>
+            </div>
+          </li>
+          <li class="list-group-item d-flex align-items-start gap-3">
+            <i class="bi bi-star-fill text-warning fs-5 mt-1"></i>
+            <div>
+              <div class="award-title">Best in Show — ASEAN Fine Arts Biennale</div>
+              <div class="text-muted small">Singapura &nbsp;·&nbsp; <span class="award-year">2024</span></div>
+            </div>
+          </li>
+          <li class="list-group-item d-flex align-items-start gap-3">
+            <i class="bi bi-patch-check-fill text-success fs-5 mt-1"></i>
+            <div>
+              <div class="award-title">Pameran Tunggal — Galeri Nasional Indonesia</div>
+              <div class="text-muted small">Jakarta &nbsp;·&nbsp; <span class="award-year">2023</span></div>
+            </div>
+          </li>
+          <li class="list-group-item d-flex align-items-start gap-3">
+            <i class="bi bi-award-fill text-warning fs-5 mt-1"></i>
+            <div>
+              <div class="award-title">Finalis — Shell Indonesia Art Award</div>
+              <div class="text-muted small">Jakarta &nbsp;·&nbsp; <span class="award-year">2023</span></div>
+            </div>
+          </li>
+          <li class="list-group-item d-flex align-items-start gap-3">
+            <i class="bi bi-globe2 text-primary fs-5 mt-1"></i>
+            <div>
+              <div class="award-title">Residensi Seni — Art Jakarta International</div>
+              <div class="text-muted small">Jakarta Convention Center &nbsp;·&nbsp; <span class="award-year">2022</span></div>
+            </div>
+          </li>
+          <li class="list-group-item d-flex align-items-start gap-3">
+            <i class="bi bi-patch-check-fill text-success fs-5 mt-1"></i>
+            <div>
+              <div class="award-title">Hibah Seni Budaya — Kemendikbud RI</div>
+              <div class="text-muted small">Kementerian Pendidikan &amp; Kebudayaan &nbsp;·&nbsp; <span class="award-year">2022</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║         TENTANG (UTILITIES)                  ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="tentang" style="background:var(--ink);padding-top:5rem;padding-bottom:5rem;">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 d-flex justify-content-center">
+        <div style="width:260px;height:320px;background:#2a1f10;display:flex;align-items:center;justify-content:center;border:1px solid #3a3025;">
+          <div class="text-center px-4">
+            <div style="font-family:'Playfair Display',serif;font-size:5rem;color:var(--rust);line-height:1;">A</div>
+            <div style="font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:#4a4030;margin-top:.5rem;">Aruna Dewanti</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="section-label mb-2" style="color:var(--rust);">
+          <i class="bi bi-person me-1"></i>Tentang Seniman
+        </div>
+        <h2 class="section-title mb-4 text-white">Aruna Dewanti</h2>
+        <p style="color:#a09880;line-height:1.8;font-size:.95rem;" class="mb-4">
+          Lahir di Surabaya (1990), Aruna Dewanti adalah seniman multidisiplin yang berkarya di persimpangan tradisi visual Nusantara dan estetika kontemporer. Ia menempuh pendidikan seni di Institut Seni Indonesia Yogyakarta dan melanjutkan studi di LASALLE College of the Arts, Singapura.
+        </p>
+        <p style="color:#6b6050;line-height:1.8;font-size:.9rem;" class="mb-5">
+          Karyanya mengeksplorasi tema memori kolektif, identitas budaya, dan migrasi nilai dalam masyarakat urban Indonesia. Saat ini berbasis di Surabaya dan aktif berkolaborasi dengan seniman Asia Tenggara.
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <span class="badge rounded-0 text-bg-secondary py-2 px-3" style="font-weight:400;letter-spacing:.1em;">Cat Minyak</span>
+          <span class="badge rounded-0 text-bg-secondary py-2 px-3" style="font-weight:400;letter-spacing:.1em;">Ilustrasi Digital</span>
+          <span class="badge rounded-0 text-bg-secondary py-2 px-3" style="font-weight:400;letter-spacing:.1em;">Fotografi Seni</span>
+          <span class="badge rounded-0 text-bg-secondary py-2 px-3" style="font-weight:400;letter-spacing:.1em;">Mixed Media</span>
+          <span class="badge rounded-0 text-bg-secondary py-2 px-3" style="font-weight:400;letter-spacing:.1em;">Charcoal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║         FORM KONTAK (inline)                 ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="kontak" class="contact-section" style="padding-top:5rem;padding-bottom:5rem;">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <div class="section-label mb-2"><i class="bi bi-send me-1"></i>Hubungi Saya</div>
+        <h2 class="section-title mb-3">Mari Berkolaborasi</h2>
+        <p class="text-muted mb-4" style="font-size:.9rem;line-height:1.8;">
+          Terbuka untuk kolaborasi, pameran bersama, pesanan karya kustom, dan lisensi komersial. Isi formulir atau hubungi langsung melalui email.
+        </p>
+        <ul class="list-unstyled" style="font-size:.875rem;">
+          <li class="mb-3"><i class="bi bi-envelope me-3 text-rust" style="color:var(--rust);"></i>aruna@arunastudio.id</li>
+          <li class="mb-3"><i class="bi bi-telephone me-3" style="color:var(--rust);"></i>+62 812-3456-7890</li>
+          <li><i class="bi bi-geo-alt me-3" style="color:var(--rust);"></i>Surabaya, Jawa Timur, Indonesia</li>
+        </ul>
+      </div>
+      <div class="col-lg-7">
+        <div class="bg-white p-4 p-lg-5 shadow-sm">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label class="form-label">Nama Lengkap</label>
+              <input type="text" class="form-control" placeholder="e.g. Budi Santoso"/>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label">Alamat Email</label>
+              <input type="email" class="form-control" placeholder="e.g. budi@email.com"/>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Keperluan</label>
+              <select class="form-select">
+                <option value="" disabled selected>Pilih keperluan</option>
+                <option>Pembelian Karya Original</option>
+                <option>Lisensi Komersial</option>
+                <option>Kolaborasi Pameran</option>
+                <option>Karya Kustom / Komisi</option>
+                <option>Pertanyaan Umum</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Pesan</label>
+              <textarea class="form-control" rows="4" placeholder="Ceritakan ide atau pertanyaan Anda..."></textarea>
+            </div>
+            <div class="col-12 d-flex align-items-center gap-3 pt-1">
+              <button class="btn btn-rust px-4"><i class="bi bi-send me-2"></i>Kirim Pesan</button>
+              <small class="text-muted">Balasan dalam 1–2 hari kerja</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║              FOOTER                          ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<footer class="py-5">
+  <div class="container">
+    <div class="row g-5 mb-5">
+
+      <div class="col-lg-4">
+        <div class="footer-brand mb-3">Aruna<span>.</span>Studio</div>
+        <p class="mb-4">Portofolio seni Aruna Dewanti — merayakan keindahan visual Nusantara dalam bahasa kontemporer.</p>
+        <div class="d-flex gap-2">
+          <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-behance"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-pinterest"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-2">
+        <div class="footer-heading">Navigasi</div>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#galeri">Galeri</a></li>
+          <li class="mb-2"><a href="#katalog">Katalog</a></li>
+          <li class="mb-2"><a href="#penghargaan">Penghargaan</a></li>
+          <li class="mb-2"><a href="#tentang">Tentang</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-6 col-lg-2">
+        <div class="footer-heading">Media</div>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#">Lukisan</a></li>
+          <li class="mb-2"><a href="#">Digital</a></li>
+          <li class="mb-2"><a href="#">Sketsa</a></li>
+          <li class="mb-2"><a href="#">Fotografi</a></li>
+          <li><a href="#">Mixed Media</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="footer-heading">Newsletter</div>
+        <p class="mb-3">Dapatkan notifikasi karya terbaru dan jadwal pameran langsung di inbox Anda.</p>
+        <div class="d-flex gap-2">
+          <input type="email" class="form-control form-control-sm rounded-0" placeholder="email@contoh.com"
+            style="background:#2a1f10;border-color:#3a3025;color:#ccc5b0;"/>
+          <button class="btn btn-rust btn-sm px-3">Daftar</button>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="footer-divider"/>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center pt-3 gap-2">
+      <p class="mb-0" style="font-size:.78rem;">© 2024 Aruna Studio. Seluruh karya dilindungi hak cipta.</p>
+      <div class="d-flex gap-3">
+        <a href="#" style="font-size:.78rem;">Kebijakan Privasi</a>
+        <a href="#" style="font-size:.78rem;">Lisensi</a>
+        <a href="#" style="font-size:.78rem;">Syarat &amp; Ketentuan</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║              MODAL                           ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<div class="modal fade" id="artModal1" tabindex="-1" aria-labelledby="artModal1Label" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="artModal1Label">Senja Nusantara — 2024</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-0">
+        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900&q=80"
+             alt="Senja Nusantara" class="modal-img"/>
+        <div class="p-4">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="badge rounded-0 bg-warning text-dark">Terjual</span>
+            <span class="badge rounded-0 bg-secondary">Cat Minyak</span>
+            <span class="badge rounded-0 bg-secondary">100 × 80 cm</span>
+          </div>
+          <p class="text-muted" style="font-size:.9rem;line-height:1.8;">
+            Interpretasi abstrak panorama kepulauan Indonesia saat senja. Menggunakan teknik impasto dengan lapisan warna oranye keemasan, biru nila, dan ungu violet yang kontras. Karya ini merupakan bagian dari seri "Horizon Nusantara" yang dipamerkan di Galeri Nasional Jakarta pada 2024.
+          </p>
+          <div class="row g-3 mt-1 text-center" style="font-size:.8rem;">
+            <div class="col-4 border-end">
+              <div class="text-muted text-uppercase" style="letter-spacing:.1em;font-size:.68rem;">Media</div>
+              <strong>Cat Minyak</strong>
+            </div>
+            <div class="col-4 border-end">
+              <div class="text-muted text-uppercase" style="letter-spacing:.1em;font-size:.68rem;">Dimensi</div>
+              <strong>100 × 80 cm</strong>
+            </div>
+            <div class="col-4">
+              <div class="text-muted text-uppercase" style="letter-spacing:.1em;font-size:.68rem;">Tahun</div>
+              <strong>2024</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer border-0 bg-light">
+        <button class="btn btn-outline-secondary btn-sm rounded-0" data-bs-dismiss="modal">Tutup</button>
+        <a href="#" class="btn btn-rust btn-sm"><i class="bi bi-download me-2"></i>Unduh Preview JPG</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Contact (from Navbar) -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="contactModalLabel">Hubungi Aruna Studio</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="mb-3">
+          <label class="form-label">Nama</label>
+          <input type="text" class="form-control" placeholder="Nama Anda"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" placeholder="email@contoh.com"/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Pesan Singkat</label>
+          <textarea class="form-control" rows="3" placeholder="Apa yang ingin Anda sampaikan?"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer border-0">
+        <button class="btn btn-outline-secondary btn-sm rounded-0" data-bs-dismiss="modal">Batal</button>
+        <button class="btn btn-rust btn-sm"><i class="bi bi-send me-2"></i>Kirim</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Filter buttons toggle
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    if (a.dataset.bsToggle) return; // skip modal triggers
+    a.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
